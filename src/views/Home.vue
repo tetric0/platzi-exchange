@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Api from "@/api.js";
+import api from "@/api.js";
 import PxAssetsTable from "@/components/PxAssetsTable";
 
 export default {
@@ -20,7 +20,7 @@ export default {
   },
 
   created() {
-    Api.getAssets().then((assets) => (this.assets = assets));
+    api.getAssets().then((assets) => (this.assets = assets));
   },
 };
 </script>
