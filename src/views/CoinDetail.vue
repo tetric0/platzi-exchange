@@ -82,58 +82,6 @@
   </div>
 </template>
 
-<script>
-import api from "@/api";
-
-export default {
-  name: "CoinDetail",
-
-  data() {
-    return {
-      asset: {},
-      history: [],
-    };
-  },
-
-  computed: {
-    min() {
-      return Math.min(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
-      );
-    },
-
-    max() {
-      return Math.max(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
-      );
-    },
-
-    avg() {
-      return Math.abs(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
-      );
-    },
-  },
-
-  created() {
-    this.getCoin();
-  },
-
-  methods: {
-    getCoin() {
-      const id = this.$route.params.id;
-
-      Promise.all([api.getAsset(id), api.getAssetHistory(id)]).then(
-        ([asset, history]) => {
-          this.asset = asset;
-          this.history = history;
-        }
-      );
-    },
-  },
-};
-</script>
-
 <style scoped>
 td {
   padding: 10px;
