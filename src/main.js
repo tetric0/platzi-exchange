@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import "@/assets/css/tailwind.css";
 import { VueSpinners } from "@saeris/vue-spinners";
-import Chart from "chart.js/auto";
+import Chart from "chart.js";
 import Chartkick from "vue-chartkick";
 
 Vue.use(VueSpinners);
