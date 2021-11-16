@@ -61,7 +61,7 @@
               rounded
             "
           >
-            Cambiar
+            {{ fromUsd ? `USD a ${asset.symbol}` : `${asset.symbol} a USD` }}
           </button>
 
           <div class="flex flex-row my-5">
@@ -70,6 +70,7 @@
                 v-model="convertValue"
                 id="convertValue"
                 type="number"
+                :placeholder="`Valor en ${fromUsd ? 'USD' : asset.symbol}`"
                 class="
                   text-center
                   bg-white
@@ -88,7 +89,7 @@
           </div>
 
           <span class="text-xl">
-            {{ convertResult }}
+            {{ convertResult }} {{ fromUsd ? asset.symbol : "USD" }}
           </span>
         </div>
       </div>
