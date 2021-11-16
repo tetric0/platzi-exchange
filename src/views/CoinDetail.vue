@@ -50,6 +50,7 @@
 
         <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
           <button
+            @click="toggleConverter"
             class="
               bg-green-500
               hover:bg-green-700
@@ -66,6 +67,7 @@
           <div class="flex flex-row my-5">
             <label class="w-full" for="convertValue">
               <input
+                v-model="convertValue"
                 id="convertValue"
                 type="number"
                 class="
@@ -85,7 +87,9 @@
             </label>
           </div>
 
-          <span class="text-xl"></span>
+          <span class="text-xl">
+            {{ convertResult }}
+          </span>
         </div>
       </div>
 
@@ -142,10 +146,24 @@ export default {
       asset: {},
       history: [],
       markets: [],
+      fromUsd: true,
+      convertValue: null,
     };
   },
 
   computed: {
+    convertResult() {
+      if (!this.convertValue) {
+        return 0;
+      }
+
+      const result = this.fromUsd
+        ? this.convertValue / this.asset.priceUsd
+        : this.convertValue * this.asset.priceUsd;
+
+      return result.toFixed(2);
+    },
+
     min() {
       return Math.min(
         ...this.history.map((item) => parseFloat(item.priceUsd).toFixed(2))
@@ -176,6 +194,10 @@ export default {
   },
 
   methods: {
+    toggleConverter() {
+      this.fromUsd = !this.fromUsd;
+    },
+
     getWebSite(exchange) {
       this.$set(exchange, "isLoading", true);
 
